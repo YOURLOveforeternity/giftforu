@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Gift For You</title>
+
+<style>
+
+body{
+margin:0;
+padding:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:linear-gradient(120deg,#ff9a9e,#fad0c4);
+font-family:'Segoe UI',sans-serif;
+overflow:hidden;
+}
+
+/* Gift box */
+#gift{
+width:150px;
+height:150px;
+background:#ff4d6d;
+position:relative;
+cursor:pointer;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:20px;
+font-weight:bold;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+transition:0.3s;
+}
+
+#gift:hover{
+transform:scale(1.1);
+}
+
+/* ribbon */
+#gift:before{
+content:'';
+position:absolute;
+width:30px;
+height:100%;
+background:white;
+left:60px;
+}
+
+#gift:after{
+content:'';
+position:absolute;
+height:30px;
+width:100%;
+background:white;
+top:60px;
+}
+
+/* password */
+#passwordBox{
+display:none;
+margin-top:30px;
+}
+
+input{
+padding:10px;
+border:none;
+border-radius:5px;
+font-size:16px;
+}
+
+button{
+padding:10px 15px;
+border:none;
+background:#ff4d6d;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* Book */
+#book{
+display:none;
+width:420px;
+height:320px;
+background:white;
+border-radius:10px;
+padding:25px;
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+animation:openBook 1s ease;
+z-index:2;
+}
+
+@keyframes openBook{
+from{
+transform:scale(0) rotateY(90deg);
+}
+to{
+transform:scale(1) rotateY(0deg);
+}
+}
+
+/* poem */
+#poem{
+color:#333;
+line-height:1.7;
+text-align:center;
+}
+
+/* hearts */
+.heart{
+position:fixed;
+top:-10px;
+color:pink;
+font-size:22px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="gift">Open It</div>
+
+<div id="passwordBox">
+<p>Enter the secret name ❤️</p>
+<input type="password" id="pass">
+<button onclick="openBook()">Unlock</button>
+</div>
+
+<div id="book">
+<div id="poem">
+
+<h2>For Yashika ❤️</h2>
+
+<p>
+In the quiet moments of the day,<br>
+My thoughts softly drift your way.<br><br>
+
+Like gentle stars in midnight skies,<br>
+Your name alone makes my heart rise.<br><br>
+
+If love were rain from skies above,<br>
+It would fall endlessly with my love.<br><br>
+
+Every heartbeat whispers true,<br>
+My world feels brighter because of you.<br><br>
+
+And if forever had a name,<br>
+Yashika… it would be the same.
+</p>
+
+</div>
+</div>
+
+<script>
+
+/* gift click */
+document.getElementById("gift").onclick=function(){
+document.getElementById("passwordBox").style.display="block";
+burstHearts(40);
+};
+
+/* open book */
+function openBook(){
+
+var pass=document.getElementById("pass").value;
+
+if(pass.toLowerCase()=="yashika"){
+
+document.getElementById("book").style.display="block";
+
+/* MASSIVE HEART EXPLOSION */
+burstHearts(200);
+
+}
+else{
+alert("Wrong password ❤️");
+}
+
+}
+
+/* create heart */
+function createHeart(){
+
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💗";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*40)+"px";
+heart.style.animationDuration=(3+Math.random()*5)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove();},8000);
+
+}
+
+/* burst hearts */
+function burstHearts(amount){
+
+for(let i=0;i<amount;i++){
+
+setTimeout(createHeart,i*20);
+
+}
+
+}
+
+/* continuous love rain */
+setInterval(()=>{
+createHeart();
+},200);
+
+</script>
+
+</body>
+</html>
